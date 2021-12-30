@@ -8,12 +8,14 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] List<Waypoint> path = new List<Waypoint>();
 
     void Start() {
-        PrintPath();
+        StartCoroutine(FollowPath());
     }
 
-    void PrintPath() {
+    IEnumerator FollowPath() {
         foreach (Waypoint waypoint in path) {
             Debug.Log(waypoint.name);
+            transform.position = waypoint.transform.position;
+            yield return new WaitForSeconds(1f);
         }
 
     }
